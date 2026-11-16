@@ -7,12 +7,12 @@ const connectDB = async () => {
 
   try {
     const conn = await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 2500,
+      serverSelectionTimeoutMS: 10000,
     });
     console.log(`[MongoDB] Connected successfully to host: ${conn.connection.host}`);
     return conn;
   } catch (initialErr) {
-    console.warn(`[MongoDB] Local connection to ${uri} failed: ${initialErr.message}`);
+    console.warn(`[MongoDB] Primary connection to ${uri.replace(/:([^@]+)@/, ':****@')} failed: ${initialErr.message}`);
     console.log('[MongoDB] Attempting in-memory database fallback for seamless development...');
 
     try {
@@ -25,7 +25,7 @@ const connectDB = async () => {
       return conn;
     } catch (memErr) {
       console.error('[MongoDB] In-memory database fallback also failed or not installed.');
-      console.error('[MongoDB] Please ensure MongoDB is running locally or specify MONGODB_URI in backend/.env');
+      console.error('[MongoDB] Please ensure MongoDB is running locally or specify valid MONGODB_URI in backend/.env');
       throw initialErr;
     }
   }
