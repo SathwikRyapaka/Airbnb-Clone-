@@ -44,12 +44,12 @@ const CategoryBar = ({ selectedCategory, onSelectCategory, onOpenFilters, active
   };
 
   return (
-    <div className="sticky top-20 z-30 bg-white border-b border-neutral-100 shadow-sm py-3">
+    <div className="sticky top-20 z-30 bg-white/90 backdrop-blur-md border-b border-lavender shadow-sm py-3 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3">
         {/* Scroll Left Button */}
         <button
           onClick={() => scroll('left')}
-          className="hidden md:flex p-1.5 rounded-full border border-neutral-300 hover:shadow-md transition-shadow text-neutral-600 bg-white flex-shrink-0"
+          className="hidden md:flex p-2 rounded-full border border-lavender hover:border-powder hover:bg-lavender/40 transition-all text-slate-600 bg-white shadow-soft flex-shrink-0"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -57,7 +57,7 @@ const CategoryBar = ({ selectedCategory, onSelectCategory, onOpenFilters, active
         {/* Categories List */}
         <div
           ref={scrollRef}
-          className="flex items-center gap-6 overflow-x-auto no-scrollbar scroll-smooth flex-1 py-1"
+          className="flex items-center gap-3 md:gap-4 overflow-x-auto no-scrollbar scroll-smooth flex-1 py-1"
         >
           {CATEGORIES.map((cat) => {
             const IconComponent = cat.icon;
@@ -67,15 +67,15 @@ const CategoryBar = ({ selectedCategory, onSelectCategory, onOpenFilters, active
               <button
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.id)}
-                className={`flex flex-col items-center gap-2 pb-2 border-b-2 text-xs font-semibold whitespace-nowrap transition-all flex-shrink-0 group ${
+                className={`flex items-center gap-2 py-2 px-3.5 rounded-full text-xs font-bold whitespace-nowrap transition-all flex-shrink-0 group ${
                   isSelected
-                    ? 'border-neutral-900 text-neutral-900 font-bold'
-                    : 'border-transparent text-neutral-500 hover:text-neutral-800 hover:border-neutral-300'
+                    ? 'bg-gradient-to-r from-powder to-peach text-white shadow-soft scale-105'
+                    : 'bg-white border border-lavender text-slate-600 hover:text-powder-dark hover:border-powder/60 hover:bg-lavender/30'
                 }`}
               >
                 <IconComponent
-                  className={`w-6 h-6 transition-transform group-hover:scale-110 ${
-                    isSelected ? 'text-neutral-900' : 'text-neutral-500 group-hover:text-neutral-800'
+                  className={`w-4 h-4 transition-transform group-hover:scale-110 ${
+                    isSelected ? 'text-white' : 'text-slate-400 group-hover:text-powder'
                   }`}
                 />
                 <span>{cat.label}</span>
@@ -87,7 +87,7 @@ const CategoryBar = ({ selectedCategory, onSelectCategory, onOpenFilters, active
         {/* Scroll Right Button */}
         <button
           onClick={() => scroll('right')}
-          className="hidden md:flex p-1.5 rounded-full border border-neutral-300 hover:shadow-md transition-shadow text-neutral-600 bg-white flex-shrink-0"
+          className="hidden md:flex p-2 rounded-full border border-lavender hover:border-powder hover:bg-lavender/40 transition-all text-slate-600 bg-white shadow-soft flex-shrink-0"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
@@ -95,12 +95,12 @@ const CategoryBar = ({ selectedCategory, onSelectCategory, onOpenFilters, active
         {/* Filters Toggle Button */}
         <button
           onClick={onOpenFilters}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-neutral-300 text-xs font-semibold text-neutral-700 hover:border-neutral-900 transition-colors flex-shrink-0 bg-white shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-lavender hover:border-powder text-xs font-bold text-slate-700 hover:bg-lavender/40 transition-all flex-shrink-0 bg-white shadow-soft"
         >
-          <SlidersHorizontal className="w-4 h-4" />
+          <SlidersHorizontal className="w-4 h-4 text-powder-dark" />
           <span className="hidden sm:inline">Filters</span>
           {activeFilterCount > 0 && (
-            <span className="w-5 h-5 rounded-full bg-neutral-900 text-white text-[10px] flex items-center justify-center font-bold">
+            <span className="w-5 h-5 rounded-full bg-gradient-to-r from-powder to-peach text-white text-[10px] flex items-center justify-center font-extrabold shadow-sm">
               {activeFilterCount}
             </span>
           )}

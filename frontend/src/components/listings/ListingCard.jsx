@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Star, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Heart, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 const ListingCard = ({ listing, showTotalWithTaxes = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -33,10 +33,10 @@ const ListingCard = ({ listing, showTotalWithTaxes = false }) => {
   return (
     <div
       onClick={() => navigate(`/listing/${listing._id}`)}
-      className="group cursor-pointer flex flex-col gap-2"
+      className="group cursor-pointer flex flex-col gap-3 p-3 bg-white rounded-3xl border border-lavender hover:border-powder/60 shadow-soft hover:shadow-card transition-all duration-300"
     >
       {/* Image Showcase Container */}
-      <div className="relative aspect-[20/19] w-full overflow-hidden rounded-2xl bg-neutral-100">
+      <div className="relative aspect-[20/19] w-full overflow-hidden rounded-2xl bg-lavender/40">
         <img
           src={images[currentImageIndex]?.url}
           alt={listing.title}
@@ -44,16 +44,16 @@ const ListingCard = ({ listing, showTotalWithTaxes = false }) => {
           loading="lazy"
         />
 
-        {/* Favorite Heart Button */}
+        {/* Favorite Heart Button with Warm Sunset Peach */}
         <button
           onClick={toggleFavorite}
-          className="absolute top-3 right-3 p-2 rounded-full transition-transform active:scale-90 hover:scale-110 z-10"
+          className="absolute top-3 right-3 p-2 rounded-full transition-transform active:scale-90 hover:scale-110 z-10 bg-white/70 backdrop-blur-md shadow-sm"
         >
           <Heart
-            className={`w-6 h-6 stroke-[2] ${
+            className={`w-5 h-5 stroke-[2.2] transition-colors ${
               isFavorite
-                ? 'fill-rose-500 stroke-rose-500'
-                : 'fill-black/30 stroke-white'
+                ? 'fill-peach stroke-peach-dark'
+                : 'fill-transparent stroke-slate-700'
             }`}
           />
         </button>
@@ -63,13 +63,13 @@ const ListingCard = ({ listing, showTotalWithTaxes = false }) => {
           <>
             <button
               onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/90 hover:bg-white text-neutral-800 opacity-0 group-hover:opacity-100 transition-opacity shadow-md z-10"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/80 hover:bg-white text-slate-800 opacity-0 group-hover:opacity-100 transition-opacity shadow-md z-10"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/90 hover:bg-white text-neutral-800 opacity-0 group-hover:opacity-100 transition-opacity shadow-md z-10"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-white/80 hover:bg-white text-slate-800 opacity-0 group-hover:opacity-100 transition-opacity shadow-md z-10"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -81,7 +81,7 @@ const ListingCard = ({ listing, showTotalWithTaxes = false }) => {
                   key={idx}
                   className={`h-1.5 rounded-full transition-all ${
                     idx === currentImageIndex
-                      ? 'w-4 bg-white'
+                      ? 'w-4 bg-white shadow-sm'
                       : 'w-1.5 bg-white/60'
                   }`}
                 />
@@ -90,46 +90,51 @@ const ListingCard = ({ listing, showTotalWithTaxes = false }) => {
           </>
         )}
 
-        {/* Guest Favorite Badge */}
+        {/* Guest Favorite Badge in Warm Sunset Peach & Soft Lavender White */}
         {listing.rating >= 4.9 && (
-          <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm text-[11px] font-bold text-neutral-900 z-10">
-            Guest favorite
+          <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm text-[11px] font-extrabold text-slate-800 flex items-center gap-1 border border-peach/30 z-10">
+            <Sparkles className="w-3 h-3 text-peach-dark fill-peach" />
+            <span>Guest favorite</span>
           </div>
         )}
       </div>
 
       {/* Listing Details */}
-      <div className="flex flex-col gap-0.5 text-sm">
+      <div className="flex flex-col gap-1 px-1 text-sm">
         <div className="flex items-center justify-between">
-          <p className="font-semibold text-neutral-900 truncate">
+          <p className="font-bold text-slate-900 truncate">
             {listing.location?.city}, {listing.location?.country}
           </p>
-          <div className="flex items-center gap-1 font-semibold text-neutral-800 text-xs">
-            <Star className="w-3.5 h-3.5 fill-neutral-900 stroke-neutral-900" />
+          <div className="flex items-center gap-1 font-bold text-xs text-slate-800">
+            <Star className="w-3.5 h-3.5 fill-peach text-peach-dark" />
             <span>{listing.rating > 0 ? listing.rating.toFixed(2) : 'New'}</span>
           </div>
         </div>
 
-        <p className="text-neutral-500 text-xs truncate">
+        <p className="text-slate-500 text-xs truncate font-medium">
           {listing.propertyType} · {listing.category}
         </p>
 
-        <p className="text-neutral-500 text-xs">
-          {listing.guests} guests · {listing.bedrooms} beds
+        <p className="text-slate-400 text-xs">
+          {listing.guests} guests · {listing.bedrooms} bed{listing.bedrooms > 1 ? 's' : ''}
         </p>
 
-        <div className="mt-1 flex items-baseline gap-1">
+        <div className="mt-1.5 pt-1.5 border-t border-lavender flex items-baseline justify-between">
           {showTotalWithTaxes ? (
             <div>
-              <span className="font-bold text-neutral-900">${totalPrice}</span>
-              <span className="text-neutral-500 text-xs"> total before taxes</span>
+              <span className="font-extrabold text-slate-900 text-base">${totalPrice}</span>
+              <span className="text-slate-500 text-xs"> total</span>
             </div>
           ) : (
             <div>
-              <span className="font-bold text-neutral-900">${listing.pricePerNight}</span>
-              <span className="text-neutral-500 text-xs"> night</span>
+              <span className="font-extrabold text-slate-900 text-base">${listing.pricePerNight}</span>
+              <span className="text-slate-500 text-xs"> / night</span>
             </div>
           )}
+
+          <span className="text-[11px] font-bold text-powder-deep bg-powder/15 px-2 py-0.5 rounded-full">
+            Available
+          </span>
         </div>
       </div>
     </div>

@@ -50,17 +50,17 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-neutral-100">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-float overflow-hidden border border-lavender">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
-          <div className="flex items-center gap-6 text-sm font-semibold text-neutral-600">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-lavender bg-lavender/20">
+          <div className="flex items-center gap-6 text-sm font-bold text-slate-500">
             <button
               onClick={() => setActiveTab('where')}
               className={`pb-1 transition-colors ${
                 activeTab === 'where'
-                  ? 'border-b-2 border-neutral-900 text-neutral-900 font-bold'
-                  : 'hover:text-neutral-900'
+                  ? 'border-b-2 border-powder text-powder-deep font-extrabold'
+                  : 'hover:text-slate-800'
               }`}
             >
               Where
@@ -69,8 +69,8 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
               onClick={() => setActiveTab('when')}
               className={`pb-1 transition-colors ${
                 activeTab === 'when'
-                  ? 'border-b-2 border-neutral-900 text-neutral-900 font-bold'
-                  : 'hover:text-neutral-900'
+                  ? 'border-b-2 border-powder text-powder-deep font-extrabold'
+                  : 'hover:text-slate-800'
               }`}
             >
               When
@@ -79,8 +79,8 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
               onClick={() => setActiveTab('who')}
               className={`pb-1 transition-colors ${
                 activeTab === 'who'
-                  ? 'border-b-2 border-neutral-900 text-neutral-900 font-bold'
-                  : 'hover:text-neutral-900'
+                  ? 'border-b-2 border-powder text-powder-deep font-extrabold'
+                  : 'hover:text-slate-800'
               }`}
             >
               Who
@@ -88,7 +88,7 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-neutral-100 text-neutral-500 hover:text-neutral-900 transition-colors"
+            className="p-1.5 rounded-full hover:bg-lavender text-slate-500 hover:text-slate-900 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -98,23 +98,23 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
         <div className="p-6">
           {activeTab === 'where' && (
             <div>
-              <label className="block text-sm font-bold text-neutral-900 mb-2">
+              <label className="block text-sm font-extrabold text-slate-900 mb-2">
                 Search destinations
               </label>
               <div className="relative mb-6">
-                <MapPin className="absolute left-4 top-3.5 w-5 h-5 text-neutral-400" />
+                <MapPin className="absolute left-4 top-3.5 w-5 h-5 text-powder" />
                 <input
                   type="text"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                   placeholder="Search by city, country, or landmark..."
-                  className="w-full pl-12 pr-4 py-3 rounded-2xl border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium"
+                  className="w-full pl-12 pr-4 py-3 rounded-2xl border border-lavender text-sm focus:outline-none focus:ring-2 focus:ring-powder font-semibold text-slate-800"
                   autoFocus
                 />
               </div>
 
               <div>
-                <p className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-3">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
                   Popular getaway spots
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -122,10 +122,10 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
                     <button
                       key={dest.name}
                       onClick={() => setDestination(dest.query)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                      className={`px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all ${
                         destination === dest.query
-                          ? 'border-rose-500 bg-rose-50 text-rose-700'
-                          : 'border-neutral-200 hover:border-neutral-400 text-neutral-700'
+                          ? 'border-powder bg-gradient-to-r from-powder to-peach text-white shadow-soft'
+                          : 'border-lavender hover:border-powder/60 bg-white text-slate-700'
                       }`}
                     >
                       {dest.name}
@@ -138,35 +138,35 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
 
           {activeTab === 'when' && (
             <div>
-              <p className="text-sm font-bold text-neutral-900 mb-4">Select travel dates</p>
+              <p className="text-sm font-extrabold text-slate-900 mb-4">Select travel dates</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-600 mb-1">
+                  <label className="block text-xs font-bold text-slate-600 mb-1">
                     Check-in Date
                   </label>
                   <div className="relative">
-                    <Calendar className="absolute left-3.5 top-3 w-4 h-4 text-neutral-400" />
+                    <Calendar className="absolute left-3.5 top-3 w-4 h-4 text-powder" />
                     <input
                       type="date"
                       value={checkIn}
                       onChange={(e) => setCheckIn(e.target.value)}
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-neutral-300 text-sm font-medium focus:ring-2 focus:ring-rose-500"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-lavender text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-powder"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-600 mb-1">
+                  <label className="block text-xs font-bold text-slate-600 mb-1">
                     Check-out Date
                   </label>
                   <div className="relative">
-                    <Calendar className="absolute left-3.5 top-3 w-4 h-4 text-neutral-400" />
+                    <Calendar className="absolute left-3.5 top-3 w-4 h-4 text-powder" />
                     <input
                       type="date"
                       value={checkOut}
                       onChange={(e) => setCheckOut(e.target.value)}
                       min={checkIn || undefined}
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-neutral-300 text-sm font-medium focus:ring-2 focus:ring-rose-500"
+                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-lavender text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-powder"
                     />
                   </div>
                 </div>
@@ -175,24 +175,24 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
           )}
 
           {activeTab === 'who' && (
-            <div className="space-y-4 divide-y divide-neutral-100">
+            <div className="space-y-4 divide-y divide-lavender">
               <div className="flex items-center justify-between pt-2">
                 <div>
-                  <p className="text-sm font-bold text-neutral-900">Adults</p>
-                  <p className="text-xs text-neutral-500">Ages 13 or above</p>
+                  <p className="text-sm font-extrabold text-slate-900">Adults</p>
+                  <p className="text-xs text-slate-400">Ages 13 or above</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleGuestChange('adults', -1)}
                     disabled={guests.adults <= 1}
-                    className="p-1.5 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-900 disabled:opacity-30 disabled:pointer-events-none"
+                    className="p-1.5 rounded-full border border-lavender text-slate-600 hover:border-powder disabled:opacity-30 disabled:pointer-events-none"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-sm font-semibold w-6 text-center">{guests.adults}</span>
+                  <span className="text-sm font-extrabold w-6 text-center text-slate-800">{guests.adults}</span>
                   <button
                     onClick={() => handleGuestChange('adults', 1)}
-                    className="p-1.5 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-900"
+                    className="p-1.5 rounded-full border border-lavender text-slate-600 hover:border-powder"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -201,21 +201,21 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
 
               <div className="flex items-center justify-between pt-4">
                 <div>
-                  <p className="text-sm font-bold text-neutral-900">Children</p>
-                  <p className="text-xs text-neutral-500">Ages 2–12</p>
+                  <p className="text-sm font-extrabold text-slate-900">Children</p>
+                  <p className="text-xs text-slate-400">Ages 2–12</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleGuestChange('children', -1)}
                     disabled={guests.children <= 0}
-                    className="p-1.5 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-900 disabled:opacity-30 disabled:pointer-events-none"
+                    className="p-1.5 rounded-full border border-lavender text-slate-600 hover:border-powder disabled:opacity-30 disabled:pointer-events-none"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-sm font-semibold w-6 text-center">{guests.children}</span>
+                  <span className="text-sm font-extrabold w-6 text-center text-slate-800">{guests.children}</span>
                   <button
                     onClick={() => handleGuestChange('children', 1)}
-                    className="p-1.5 rounded-full border border-neutral-300 text-neutral-600 hover:border-neutral-900"
+                    className="p-1.5 rounded-full border border-lavender text-slate-600 hover:border-powder"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -226,17 +226,17 @@ const SearchModal = ({ isOpen, onClose, onSearch, currentSearchParams }) => {
         </div>
 
         {/* Footer Actions */}
-        <div className="px-6 py-4 bg-neutral-50 border-t border-neutral-100 flex items-center justify-between">
+        <div className="px-6 py-4 bg-lavender/30 border-t border-lavender flex items-center justify-between">
           <button
             onClick={handleClearAll}
-            className="text-xs font-semibold text-neutral-600 hover:text-neutral-900 underline"
+            className="text-xs font-bold text-slate-500 hover:text-slate-900 underline"
           >
             Clear all
           </button>
 
           <button
             onClick={handleApplySearch}
-            className="flex items-center gap-2 py-2.5 px-6 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 text-white font-semibold text-xs shadow-md hover:shadow-lg transition-all"
+            className="flex items-center gap-2 py-2.5 px-6 rounded-full bg-gradient-to-r from-powder to-peach text-white font-extrabold text-xs shadow-soft hover:opacity-90 transition-opacity"
           >
             <Search className="w-4 h-4" /> Search Listings
           </button>

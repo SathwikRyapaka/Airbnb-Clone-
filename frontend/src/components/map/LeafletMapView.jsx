@@ -57,8 +57,8 @@ const LeafletMapView = ({
       const customPin = L.divIcon({
         className: 'airbnb-custom-pin',
         html: `
-          <div style="background-color: #FF385C; color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 3px solid white;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div style="background: linear-gradient(135deg, #8DB9F0, #F5B69E); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(141, 185, 240, 0.4); border: 3px solid white;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
               <polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
@@ -71,9 +71,9 @@ const LeafletMapView = ({
       L.marker([lat, lng], { icon: customPin })
         .addTo(map)
         .bindPopup(`
-          <div style="font-family: inherit; font-size: 13px; font-weight: 600; padding: 4px;">
-            <p style="margin: 0; color: #111;">${singleListing.title}</p>
-            <p style="margin: 4px 0 0; color: #666; font-size: 11px;">${singleListing.location?.city}, ${singleListing.location?.country}</p>
+          <div style="font-family: inherit; font-size: 13px; font-weight: 600; padding: 6px;">
+            <p style="margin: 0; color: #1e293b;">${singleListing.title}</p>
+            <p style="margin: 4px 0 0; color: #64748b; font-size: 11px;">${singleListing.location?.city}, ${singleListing.location?.country}</p>
           </div>
         `);
       return;
@@ -88,34 +88,34 @@ const LeafletMapView = ({
 
         const { lat, lng } = item.location.coordinates;
 
-        // Custom Airbnb price bubble
+        // Custom Powder Blue & Sunset Peach price bubble
         const priceIcon = L.divIcon({
           className: 'custom-bubble',
           html: `
-            <div style="background-color: white; color: #222; font-weight: 700; font-size: 12px; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.1); white-space: nowrap; cursor: pointer;">
+            <div style="background-color: white; color: #1e293b; font-weight: 800; font-size: 12px; padding: 5px 12px; border-radius: 20px; box-shadow: 0 4px 14px rgba(141, 185, 240, 0.35); border: 2px solid #8DB9F0; white-space: nowrap; cursor: pointer; transition: all 0.2s ease;">
               $${item.pricePerNight}
             </div>
           `,
-          iconSize: [60, 26],
-          iconAnchor: [30, 13],
+          iconSize: [64, 28],
+          iconAnchor: [32, 14],
         });
 
         const popupHtml = `
-          <div style="width: 220px; font-family: inherit;">
-            <img src="${item.images?.[0]?.url || ''}" style="width: 100%; height: 130px; object-fit: cover; border-radius: 12px; margin-bottom: 8px;" alt="${item.title}" />
+          <div style="width: 230px; font-family: inherit; padding: 2px;">
+            <img src="${item.images?.[0]?.url || ''}" style="width: 100%; height: 135px; object-fit: cover; border-radius: 14px; margin-bottom: 8px;" alt="${item.title}" />
             <div style="display: flex; justify-content: space-between; align-items: baseline;">
-              <span style="font-weight: 700; font-size: 13px; color: #111;">${item.location?.city || ''}</span>
-              <span style="font-size: 11px; font-weight: 600;">★ ${item.rating > 0 ? item.rating.toFixed(2) : 'New'}</span>
+              <span style="font-weight: 800; font-size: 13px; color: #0f172a;">${item.location?.city || ''}</span>
+              <span style="font-size: 11px; font-weight: 700; color: #E28664;">★ ${item.rating > 0 ? item.rating.toFixed(2) : 'New'}</span>
             </div>
-            <p style="font-size: 11px; color: #666; margin: 2px 0 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.title}</p>
-            <div style="font-size: 13px; font-weight: 700; color: #111;">$${item.pricePerNight} <span style="font-size: 11px; font-weight: 400; color: #666;">night</span></div>
-            <a href="/listing/${item._id}" style="display: block; margin-top: 8px; padding: 6px 12px; background: #FF385C; color: white; border-radius: 8px; text-align: center; text-decoration: none; font-size: 11px; font-weight: 600;">View Listing</a>
+            <p style="font-size: 11px; color: #64748b; margin: 3px 0 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.title}</p>
+            <div style="font-size: 14px; font-weight: 800; color: #0f172a;">$${item.pricePerNight} <span style="font-size: 11px; font-weight: 500; color: #64748b;">night</span></div>
+            <a href="/listing/${item._id}" style="display: block; margin-top: 10px; padding: 8px 14px; background: linear-gradient(135deg, #8DB9F0, #F5B69E); color: white; border-radius: 12px; text-align: center; text-decoration: none; font-size: 11px; font-weight: 800; box-shadow: 0 4px 10px rgba(141, 185, 240, 0.3);">View Listing</a>
           </div>
         `;
 
         const marker = L.marker([lat, lng], { icon: priceIcon })
           .addTo(map)
-          .bindPopup(popupHtml, { maxWidth: 260 });
+          .bindPopup(popupHtml, { maxWidth: 270 });
 
         markers.push([lat, lng]);
       });
@@ -143,7 +143,7 @@ const LeafletMapView = ({
     <div
       ref={mapContainerRef}
       style={{ height, width: '100%' }}
-      className="rounded-3xl overflow-hidden shadow-inner border border-neutral-200 z-10"
+      className="rounded-3xl overflow-hidden shadow-card border border-lavender z-10"
     />
   );
 };

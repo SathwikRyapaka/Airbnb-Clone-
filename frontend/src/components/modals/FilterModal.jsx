@@ -48,17 +48,17 @@ const FilterModal = ({ isOpen, onClose, filters, onApplyFilters, onResetFilters 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-neutral-100 flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-float overflow-hidden border border-lavender flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-lavender bg-lavender/20">
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-neutral-100 text-neutral-500 hover:text-neutral-900 transition-colors"
+            className="p-1.5 rounded-full hover:bg-lavender text-slate-500 hover:text-slate-900 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
-          <h2 className="text-sm font-bold text-neutral-900">Filters</h2>
+          <h2 className="text-sm font-extrabold text-slate-900">Filters</h2>
           <div className="w-6" />
         </div>
 
@@ -66,11 +66,11 @@ const FilterModal = ({ isOpen, onClose, filters, onApplyFilters, onResetFilters 
         <div className="p-6 overflow-y-auto space-y-6 flex-1">
           {/* Price Range */}
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 mb-1">Price range</h3>
-            <p className="text-xs text-neutral-500 mb-4">Nightly rates before taxes and fees</p>
+            <h3 className="text-sm font-extrabold text-slate-900 mb-1">Price range</h3>
+            <p className="text-xs text-slate-500 font-medium mb-4">Nightly rates before taxes and fees</p>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-neutral-600 mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Minimum ($)
                 </label>
                 <input
@@ -79,11 +79,11 @@ const FilterModal = ({ isOpen, onClose, filters, onApplyFilters, onResetFilters 
                   placeholder="50"
                   value={minPrice}
                   onChange={(e) => setMinPrice(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 focus:ring-2 focus:ring-rose-500 font-medium"
+                  className="w-full px-3 py-2 text-sm rounded-xl border border-lavender focus:ring-2 focus:ring-powder font-semibold"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-neutral-600 mb-1">
+                <label className="block text-xs font-bold text-slate-600 mb-1">
                   Maximum ($)
                 </label>
                 <input
@@ -92,27 +92,27 @@ const FilterModal = ({ isOpen, onClose, filters, onApplyFilters, onResetFilters 
                   placeholder="1000+"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-neutral-300 focus:ring-2 focus:ring-rose-500 font-medium"
+                  className="w-full px-3 py-2 text-sm rounded-xl border border-lavender focus:ring-2 focus:ring-powder font-semibold"
                 />
               </div>
             </div>
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Property Type */}
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 mb-3">Property type</h3>
+            <h3 className="text-sm font-extrabold text-slate-900 mb-3">Property type</h3>
             <div className="flex flex-wrap gap-2">
               {PROPERTY_TYPES.map((type) => (
                 <button
                   key={type}
                   type="button"
                   onClick={() => setPropertyType(type)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all ${
+                  className={`px-4 py-2 rounded-full text-xs font-bold border transition-all ${
                     propertyType === type
-                      ? 'border-neutral-900 bg-neutral-900 text-white'
-                      : 'border-neutral-200 text-neutral-700 hover:border-neutral-400'
+                      ? 'border-powder bg-gradient-to-r from-powder to-peach text-white shadow-soft'
+                      : 'border-lavender text-slate-700 hover:border-powder/60 bg-white'
                   }`}
                 >
                   {type}
@@ -121,11 +121,11 @@ const FilterModal = ({ isOpen, onClose, filters, onApplyFilters, onResetFilters 
             </div>
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Amenities */}
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 mb-3">Popular amenities</h3>
+            <h3 className="text-sm font-extrabold text-slate-900 mb-3">Popular amenities</h3>
             <div className="grid grid-cols-2 gap-3">
               {AMENITY_OPTIONS.map((amenity) => {
                 const Icon = amenity.icon;
@@ -136,15 +136,15 @@ const FilterModal = ({ isOpen, onClose, filters, onApplyFilters, onResetFilters 
                     key={amenity.id}
                     type="button"
                     onClick={() => toggleAmenity(amenity.id)}
-                    className={`flex items-center gap-3 p-3 rounded-2xl border text-left text-xs font-semibold transition-all ${
+                    className={`flex items-center gap-3 p-3 rounded-2xl border text-left text-xs font-bold transition-all ${
                       isChecked
-                        ? 'border-rose-500 bg-rose-50/50 text-rose-700'
-                        : 'border-neutral-200 text-neutral-700 hover:border-neutral-300'
+                        ? 'border-powder bg-lavender/50 text-powder-deep'
+                        : 'border-lavender text-slate-700 hover:border-powder/40 bg-white'
                     }`}
                   >
-                    <Icon className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+                    <Icon className={`w-4 h-4 ${isChecked ? 'text-powder-dark' : 'text-slate-400'}`} />
                     <span className="flex-1">{amenity.label}</span>
-                    {isChecked && <Check className="w-4 h-4 text-rose-600" />}
+                    {isChecked && <Check className="w-4 h-4 text-peach-dark" />}
                   </button>
                 );
               })}
@@ -153,16 +153,16 @@ const FilterModal = ({ isOpen, onClose, filters, onApplyFilters, onResetFilters 
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 bg-neutral-50 border-t border-neutral-100 flex items-center justify-between">
+        <div className="px-6 py-4 bg-lavender/30 border-t border-lavender flex items-center justify-between">
           <button
             onClick={handleReset}
-            className="text-xs font-semibold text-neutral-600 hover:text-neutral-900 underline"
+            className="text-xs font-bold text-slate-500 hover:text-slate-900 underline"
           >
             Clear all
           </button>
           <button
             onClick={handleApply}
-            className="py-2.5 px-6 rounded-xl bg-neutral-900 text-white font-semibold text-xs hover:bg-black transition-colors"
+            className="py-2.5 px-6 rounded-full bg-gradient-to-r from-powder to-peach text-white font-extrabold text-xs shadow-soft hover:opacity-90 transition-opacity"
           >
             Show results
           </button>

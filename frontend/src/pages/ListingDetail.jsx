@@ -101,23 +101,23 @@ const ListingDetail = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-pulse">
-        <div className="h-8 bg-neutral-200 rounded w-2/3 mb-4" />
-        <div className="h-4 bg-neutral-200 rounded w-1/3 mb-8" />
-        <div className="h-[460px] bg-neutral-200 rounded-2xl mb-8" />
+        <div className="h-8 bg-lavender rounded-2xl w-2/3 mb-4" />
+        <div className="h-4 bg-lavender/60 rounded-xl w-1/3 mb-8" />
+        <div className="h-[460px] bg-lavender rounded-3xl mb-8" />
       </div>
     );
   }
 
   if (!listing) {
     return (
-      <div className="max-w-md mx-auto py-24 text-center">
-        <h2 className="text-xl font-bold text-neutral-800 mb-2">Listing Not Found</h2>
-        <p className="text-sm text-neutral-500 mb-6">
+      <div className="max-w-md mx-auto py-24 text-center px-4">
+        <h2 className="text-xl font-bold text-slate-900 mb-2">Listing Not Found</h2>
+        <p className="text-sm text-slate-500 mb-6 font-medium">
           The requested listing could not be found or has been removed by the host.
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-white rounded-xl text-xs font-semibold"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-powder to-peach text-white rounded-full text-xs font-bold shadow-soft"
         >
           <ArrowLeft className="w-4 h-4" /> Return to Explore
         </Link>
@@ -132,29 +132,31 @@ const ListingDetail = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fadeIn">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fadeIn min-h-screen">
       {/* Title & Actions Bar */}
       <div className="mb-6">
         <div className="flex items-center justify-between gap-4 mb-2">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             {listing.title}
           </h1>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => {
                 navigator.clipboard?.writeText(window.location.href);
                 showToast('Link copied to clipboard!');
               }}
-              className="flex items-center gap-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-100 py-1.5 px-3 rounded-lg transition-colors underline"
+              className="flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-white border border-lavender hover:border-powder py-2 px-3.5 rounded-full transition-all shadow-sm"
             >
-              <Share2 className="w-4 h-4" /> Share
+              <Share2 className="w-3.5 h-3.5 text-powder-dark" /> Share
             </button>
             <button
               onClick={() => setIsSaved(!isSaved)}
-              className="flex items-center gap-1.5 text-xs font-semibold text-neutral-700 hover:bg-neutral-100 py-1.5 px-3 rounded-lg transition-colors underline"
+              className="flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-white border border-lavender hover:border-peach py-2 px-3.5 rounded-full transition-all shadow-sm"
             >
               <Heart
-                className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`}
+                className={`w-3.5 h-3.5 ${
+                  isSaved ? 'fill-peach text-peach stroke-peach-dark' : 'text-slate-500'
+                }`}
               />
               {isSaved ? 'Saved' : 'Save'}
             </button>
@@ -162,24 +164,24 @@ const ListingDetail = () => {
         </div>
 
         {/* Location & Reviews Subheader */}
-        <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-neutral-800">
+        <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-slate-700">
           <div className="flex items-center gap-1">
-            <Star className="w-3.5 h-3.5 fill-neutral-900" />
+            <Star className="w-3.5 h-3.5 fill-peach text-peach-dark" />
             <span>{listing.rating > 0 ? listing.rating.toFixed(2) : 'New'}</span>
           </div>
-          <span>·</span>
-          <span className="underline">{listing.reviewCount} reviews</span>
-          <span>·</span>
+          <span className="text-slate-300">·</span>
+          <span className="underline decoration-slate-300">{listing.reviewCount} reviews</span>
+          <span className="text-slate-300">·</span>
           {listing.rating >= 4.9 && (
             <>
-              <span className="bg-rose-50 text-rose-700 px-2 py-0.5 rounded-full font-bold">
+              <span className="bg-peach-light text-peach-deep px-2.5 py-0.5 rounded-full font-extrabold border border-peach/30">
                 Guest favorite
               </span>
-              <span>·</span>
+              <span className="text-slate-300">·</span>
             </>
           )}
-          <span className="underline flex items-center gap-1 text-neutral-700">
-            <MapPin className="w-3.5 h-3.5" />
+          <span className="flex items-center gap-1 text-slate-600 font-semibold">
+            <MapPin className="w-3.5 h-3.5 text-powder-dark" />
             {listing.location?.city}, {listing.location?.state ? `${listing.location.state}, ` : ''}{listing.location?.country}
           </span>
         </div>
@@ -193,51 +195,51 @@ const ListingDetail = () => {
         {/* Left Column */}
         <div className="lg:col-span-2 space-y-8">
           {/* Host & Capacity Overview */}
-          <div className="flex items-center justify-between pb-6 border-b border-neutral-200">
+          <div className="flex items-center justify-between pb-6 border-b border-lavender">
             <div>
-              <h2 className="text-xl font-bold text-neutral-900">
+              <h2 className="text-xl font-bold text-slate-900">
                 {listing.propertyType} hosted by {host.name}
               </h2>
-              <p className="text-xs text-neutral-500 mt-1">
+              <p className="text-xs text-slate-500 mt-1 font-medium">
                 {listing.guests} guests · {listing.bedrooms} bedroom{listing.bedrooms > 1 ? 's' : ''} · {listing.beds} bed{listing.beds > 1 ? 's' : ''} · {listing.bathrooms} bath{listing.bathrooms > 1 ? 's' : ''}
               </p>
             </div>
             <img
               src={host.avatar}
               alt={host.name}
-              className="w-14 h-14 rounded-full object-cover border-2 border-neutral-100 shadow-sm"
+              className="w-14 h-14 rounded-full object-cover border-2 border-powder shadow-soft"
             />
           </div>
 
           {/* Highlights */}
-          <div className="space-y-4 pb-6 border-b border-neutral-200 text-xs">
-            <div className="flex items-start gap-4">
-              <Award className="w-5 h-5 text-neutral-700 flex-shrink-0 mt-0.5" />
+          <div className="space-y-4 pb-6 border-b border-lavender text-xs">
+            <div className="flex items-start gap-4 p-3 bg-white rounded-2xl border border-lavender shadow-sm">
+              <Award className="w-5 h-5 text-powder-deep flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold text-neutral-900">{host.name} is an experienced Superhost</p>
-                <p className="text-neutral-500">Superhosts are highly rated, committed to providing great stays for guests.</p>
+                <p className="font-bold text-slate-900">{host.name} is an experienced Superhost</p>
+                <p className="text-slate-500 mt-0.5">Superhosts are highly rated, committed to providing great stays for guests.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4">
-              <MapPin className="w-5 h-5 text-neutral-700 flex-shrink-0 mt-0.5" />
+            <div className="flex items-start gap-4 p-3 bg-white rounded-2xl border border-lavender shadow-sm">
+              <MapPin className="w-5 h-5 text-peach-dark flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold text-neutral-900">Great Location</p>
-                <p className="text-neutral-500">95% of recent guests gave the location a 5-star rating.</p>
+                <p className="font-bold text-slate-900">Exceptional Location</p>
+                <p className="text-slate-500 mt-0.5">95% of recent guests gave the location a 5-star rating.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4">
-              <ShieldCheck className="w-5 h-5 text-neutral-700 flex-shrink-0 mt-0.5" />
+            <div className="flex items-start gap-4 p-3 bg-white rounded-2xl border border-lavender shadow-sm">
+              <ShieldCheck className="w-5 h-5 text-powder flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold text-neutral-900">Free Cancellation Available</p>
-                <p className="text-neutral-500">Cancel up to 48 hours before check-in for a full refund.</p>
+                <p className="font-bold text-slate-900">Free Cancellation Available</p>
+                <p className="text-slate-500 mt-0.5">Cancel up to 48 hours before check-in for a full refund.</p>
               </div>
             </div>
           </div>
 
           {/* About This Space */}
-          <div className="pb-6 border-b border-neutral-200">
-            <h3 className="text-lg font-bold text-neutral-900 mb-3">About this space</h3>
-            <p className="text-sm text-neutral-700 leading-relaxed whitespace-pre-line">
+          <div className="pb-6 border-b border-lavender">
+            <h3 className="text-lg font-bold text-slate-900 mb-3">About this space</h3>
+            <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line font-normal">
               {showFullDesc || listing.description.length < 350
                 ? listing.description
                 : `${listing.description.slice(0, 350)}...`}
@@ -245,7 +247,7 @@ const ListingDetail = () => {
             {listing.description.length >= 350 && (
               <button
                 onClick={() => setShowFullDesc(!showFullDesc)}
-                className="mt-3 text-xs font-bold text-neutral-900 underline hover:text-black"
+                className="mt-3 text-xs font-bold text-powder-deep underline hover:text-powder-dark transition-colors"
               >
                 {showFullDesc ? 'Show less' : 'Show more >'}
               </button>
@@ -253,8 +255,8 @@ const ListingDetail = () => {
           </div>
 
           {/* Amenities Grid */}
-          <div className="pb-6 border-b border-neutral-200">
-            <h3 className="text-lg font-bold text-neutral-900 mb-4">What this place offers</h3>
+          <div className="pb-6 border-b border-lavender">
+            <h3 className="text-lg font-bold text-slate-900 mb-4">What this place offers</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {listing.amenities && listing.amenities.length > 0 ? (
                 listing.amenities.map((item) => {
@@ -264,22 +266,25 @@ const ListingDetail = () => {
                   };
                   const Icon = meta.icon;
                   return (
-                    <div key={item} className="flex items-center gap-3 text-sm text-neutral-700">
-                      <Icon className="w-5 h-5 text-neutral-600 flex-shrink-0" />
-                      <span className="capitalize">{meta.label}</span>
+                    <div
+                      key={item}
+                      className="flex items-center gap-3 text-sm text-slate-700 p-3 bg-white rounded-2xl border border-lavender"
+                    >
+                      <Icon className="w-5 h-5 text-powder-deep flex-shrink-0" />
+                      <span className="capitalize font-medium">{meta.label}</span>
                     </div>
                   );
                 })
               ) : (
-                <p className="text-xs text-neutral-500">Standard travel amenities included.</p>
+                <p className="text-xs text-slate-500 font-medium">Standard travel amenities included.</p>
               )}
             </div>
           </div>
 
           {/* Where you'll be (Map Component) */}
           <div className="pb-6">
-            <h3 className="text-lg font-bold text-neutral-900 mb-2">Where you'll be</h3>
-            <p className="text-xs text-neutral-500 mb-4">
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Where you'll be</h3>
+            <p className="text-xs text-slate-500 mb-4 font-medium">
               {listing.location?.address ? `${listing.location.address}, ` : ''}{listing.location?.city}, {listing.location?.country}
             </p>
             <LeafletMapView singleListing={listing} height="360px" />

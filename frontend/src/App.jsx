@@ -23,20 +23,20 @@ const ToastNotification = () => {
   return (
     <div className="fixed top-24 right-6 z-50 animate-bounce duration-200">
       <div
-        className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl shadow-xl text-xs font-semibold text-white border ${
+        className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl shadow-float text-xs font-bold text-white border ${
           isSuccess
-            ? 'bg-neutral-900 border-neutral-800'
+            ? 'bg-gradient-to-r from-powder to-peach border-white/40 text-slate-900 shadow-soft'
             : isError
-            ? 'bg-red-600 border-red-500'
-            : 'bg-neutral-800 border-neutral-700'
+            ? 'bg-red-600 border-red-500 text-white'
+            : 'bg-slate-800 border-slate-700 text-white'
         }`}
       >
         {isSuccess ? (
-          <CheckCircle className="w-4 h-4 text-emerald-400" />
+          <CheckCircle className="w-4 h-4 text-slate-900" />
         ) : isError ? (
           <AlertCircle className="w-4 h-4 text-red-200" />
         ) : (
-          <Info className="w-4 h-4 text-blue-300" />
+          <Info className="w-4 h-4 text-blue-200" />
         )}
         <span>{toast.message}</span>
       </div>
@@ -46,14 +46,14 @@ const ToastNotification = () => {
 
 const NotFound = () => (
   <div className="max-w-md mx-auto py-24 text-center px-4">
-    <h1 className="text-6xl font-extrabold text-neutral-900 mb-2">404</h1>
-    <h2 className="text-xl font-bold text-neutral-700 mb-2">Page not found</h2>
-    <p className="text-xs text-neutral-500 mb-6">
+    <h1 className="text-6xl font-extrabold text-powder-deep mb-2">404</h1>
+    <h2 className="text-xl font-bold text-slate-800 mb-2">Page not found</h2>
+    <p className="text-xs text-slate-500 mb-6 font-medium">
       We can't seem to find the page you're looking for.
     </p>
     <Link
       to="/"
-      className="inline-block py-2.5 px-5 bg-neutral-900 text-white rounded-xl text-xs font-bold hover:bg-neutral-800"
+      className="inline-block py-2.5 px-6 bg-gradient-to-r from-powder to-peach text-white rounded-full text-xs font-extrabold shadow-soft"
     >
       Return Home
     </Link>
@@ -88,7 +88,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-white selection:bg-rose-100 selection:text-rose-600">
+    <div className="min-h-screen flex flex-col font-sans bg-[#F9F9FD] selection:bg-peach/30 selection:text-slate-900">
       {/* Global Navbar */}
       <Navbar
         onOpenSearch={() => setIsSearchOpen(true)}

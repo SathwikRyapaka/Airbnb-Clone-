@@ -170,16 +170,16 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-neutral-100 flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-float overflow-hidden border border-lavender flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
-          <h2 className="text-base font-bold text-neutral-900">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-lavender bg-lavender/30">
+          <h2 className="text-base font-extrabold text-slate-900">
             {editingListing ? 'Edit Property Listing' : 'List a New Property on Airbnb'}
           </h2>
           <button
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-neutral-100 text-neutral-500 hover:text-neutral-900"
+            className="p-1 rounded-full hover:bg-lavender text-slate-500 hover:text-slate-900"
           >
             <X className="w-5 h-5" />
           </button>
@@ -189,10 +189,10 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
         <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-6 flex-1 text-xs">
           {/* Basic Details */}
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 mb-3">1. Listing Overview</h3>
+            <h3 className="text-sm font-extrabold text-slate-900 mb-3">1. Listing Overview</h3>
             <div className="space-y-3">
               <div>
-                <label className="block font-semibold text-neutral-700 mb-1">Title *</label>
+                <label className="block font-bold text-slate-700 mb-1">Title *</label>
                 <input
                   type="text"
                   name="title"
@@ -200,18 +200,18 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                   value={formData.title}
                   onChange={handleChange}
                   placeholder="e.g. Modern Sunset Villa with Ocean View"
-                  className="w-full px-3 py-2 text-xs border border-neutral-300 rounded-xl focus:ring-2 focus:ring-rose-500"
+                  className="w-full px-3 py-2 text-xs border border-lavender rounded-xl focus:ring-2 focus:ring-powder focus:outline-none font-semibold text-slate-800"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-neutral-700 mb-1">Category *</label>
+                  <label className="block font-bold text-slate-700 mb-1">Category *</label>
                   <select
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                    className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold bg-white text-slate-800 focus:ring-2 focus:ring-powder"
                   >
                     {CATEGORIES.filter((c) => c.id !== 'All').map((c) => (
                       <option key={c.id} value={c.id}>
@@ -222,12 +222,12 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-neutral-700 mb-1">Property Type</label>
+                  <label className="block font-bold text-slate-700 mb-1">Property Type</label>
                   <select
                     name="propertyType"
                     value={formData.propertyType}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                    className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold bg-white text-slate-800 focus:ring-2 focus:ring-powder"
                   >
                     {PROPERTY_TYPES.map((t) => (
                       <option key={t} value={t}>
@@ -239,7 +239,7 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
               </div>
 
               <div>
-                <label className="block font-semibold text-neutral-700 mb-1">Description *</label>
+                <label className="block font-bold text-slate-700 mb-1">Description *</label>
                 <textarea
                   name="description"
                   required
@@ -247,20 +247,20 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                   value={formData.description}
                   onChange={handleChange}
                   placeholder="Detail the uniqueness, scenery, and vibe of your property..."
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-rose-500"
+                  className="w-full px-3 py-2 border border-lavender rounded-xl focus:ring-2 focus:ring-powder focus:outline-none font-medium text-slate-700"
                 />
               </div>
             </div>
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Pricing & Capacity */}
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 mb-3">2. Pricing & Capacity</h3>
+            <h3 className="text-sm font-extrabold text-slate-900 mb-3">2. Pricing & Capacity</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div>
-                <label className="block font-semibold text-neutral-700 mb-1">Nightly Rate ($) *</label>
+                <label className="block font-bold text-slate-700 mb-1">Nightly Rate ($) *</label>
                 <input
                   type="number"
                   name="pricePerNight"
@@ -268,24 +268,24 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                   required
                   value={formData.pricePerNight}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-xl font-bold"
+                  className="w-full px-3 py-2 border border-lavender rounded-xl font-extrabold text-slate-900"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-neutral-700 mb-1">Cleaning Fee ($)</label>
+                <label className="block font-bold text-slate-700 mb-1">Cleaning Fee ($)</label>
                 <input
                   type="number"
                   name="cleaningFee"
                   min="0"
                   value={formData.cleaningFee}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                  className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold text-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-neutral-700 mb-1">Max Guests *</label>
+                <label className="block font-bold text-slate-700 mb-1">Max Guests *</label>
                 <input
                   type="number"
                   name="guests"
@@ -293,33 +293,33 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                   required
                   value={formData.guests}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                  className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold text-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-neutral-700 mb-1">Bedrooms</label>
+                <label className="block font-bold text-slate-700 mb-1">Bedrooms</label>
                 <input
                   type="number"
                   name="bedrooms"
                   min="0"
                   value={formData.bedrooms}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                  className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold text-slate-800"
                 />
               </div>
             </div>
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Location */}
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 mb-3">3. Geographic Location</h3>
+            <h3 className="text-sm font-extrabold text-slate-900 mb-3">3. Geographic Location</h3>
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-neutral-700 mb-1">City *</label>
+                  <label className="block font-bold text-slate-700 mb-1">City *</label>
                   <input
                     type="text"
                     name="city"
@@ -327,11 +327,11 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                     value={formData.city}
                     onChange={handleChange}
                     placeholder="e.g. Florence"
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                    className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold text-slate-800"
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-neutral-700 mb-1">Country *</label>
+                  <label className="block font-bold text-slate-700 mb-1">Country *</label>
                   <input
                     type="text"
                     name="country"
@@ -339,48 +339,48 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                     value={formData.country}
                     onChange={handleChange}
                     placeholder="e.g. Italy"
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                    className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold text-slate-800"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-neutral-700 mb-1">Latitude</label>
+                  <label className="block font-bold text-slate-700 mb-1">Latitude</label>
                   <input
                     type="number"
                     step="any"
                     name="lat"
                     value={formData.lat}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                    className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold"
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-neutral-700 mb-1">Longitude</label>
+                  <label className="block font-bold text-slate-700 mb-1">Longitude</label>
                   <input
                     type="number"
                     step="any"
                     name="lng"
                     value={formData.lng}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                    className="w-full px-3 py-2 border border-lavender rounded-xl font-semibold"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Photos */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-bold text-neutral-900">4. High Resolution Photos</h3>
+              <h3 className="text-sm font-extrabold text-slate-900">4. High Resolution Photos</h3>
               <button
                 type="button"
                 onClick={addImageUrl}
-                className="flex items-center gap-1 text-rose-600 font-bold hover:underline"
+                className="flex items-center gap-1 text-powder-deep font-bold hover:underline"
               >
                 <Plus className="w-3.5 h-3.5" /> Add photo URL
               </button>
@@ -393,13 +393,13 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
                     value={url}
                     onChange={(e) => handleImageUrlChange(i, e.target.value)}
                     placeholder={`Photo URL #${i + 1} (Unsplash or direct image URL)`}
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-xl"
+                    className="w-full px-3 py-2 border border-lavender rounded-xl text-slate-800 font-medium"
                   />
                   {formData.imageUrls.length > 1 && (
                     <button
                       type="button"
                       onClick={() => removeImageUrl(i)}
-                      className="p-2 text-neutral-400 hover:text-red-500 rounded"
+                      className="p-2 text-slate-400 hover:text-red-500 rounded-xl"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -409,24 +409,24 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
             </div>
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Amenities */}
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 mb-3">5. Amenities</h3>
+            <h3 className="text-sm font-extrabold text-slate-900 mb-3">5. Amenities</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {AMENITY_KEYS.map((am) => (
                 <label
                   key={am.id}
-                  className="flex items-center gap-2 p-2 border border-neutral-200 rounded-xl cursor-pointer hover:bg-neutral-50"
+                  className="flex items-center gap-2 p-2.5 border border-lavender rounded-xl cursor-pointer hover:bg-lavender/30 transition-colors"
                 >
                   <input
                     type="checkbox"
                     checked={formData.amenities.includes(am.id)}
                     onChange={() => toggleAmenity(am.id)}
-                    className="w-3.5 h-3.5 text-rose-500 rounded border-neutral-300"
+                    className="w-3.5 h-3.5 text-powder rounded border-lavender focus:ring-powder"
                   />
-                  <span className="font-medium text-neutral-700">{am.label}</span>
+                  <span className="font-semibold text-slate-700">{am.label}</span>
                 </label>
               ))}
             </div>
@@ -435,7 +435,7 @@ const ListingFormModal = ({ isOpen, onClose, editingListing = null, onSaved }) =
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 bg-gradient-to-r from-rose-500 to-rose-600 text-white font-bold rounded-xl text-sm shadow-md hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full py-3.5 bg-gradient-to-r from-powder to-peach text-white font-extrabold rounded-2xl text-sm shadow-soft hover:shadow-card transition-all disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {loading ? (
               <>

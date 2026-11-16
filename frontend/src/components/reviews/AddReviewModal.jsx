@@ -54,14 +54,14 @@ const AddReviewModal = ({ isOpen, onClose, listingId, onReviewAdded }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-neutral-100 flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-float overflow-hidden border border-lavender flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
-          <h3 className="text-sm font-bold text-neutral-900">Write a Review</h3>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-lavender bg-lavender/20">
+          <h3 className="text-sm font-extrabold text-slate-900">Write a Review</h3>
           <button
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-neutral-100 text-neutral-500 hover:text-neutral-900"
+            className="p-1 rounded-full hover:bg-lavender text-slate-500 hover:text-slate-900"
           >
             <X className="w-5 h-5" />
           </button>
@@ -71,7 +71,7 @@ const AddReviewModal = ({ isOpen, onClose, listingId, onReviewAdded }) => {
         <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-5 flex-1">
           {/* Overall Star Rating */}
           <div className="text-center">
-            <p className="text-xs font-semibold text-neutral-600 mb-2">Overall Rating</p>
+            <p className="text-xs font-bold text-slate-600 mb-2">Overall Stay Rating</p>
             <div className="flex items-center justify-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -85,29 +85,29 @@ const AddReviewModal = ({ isOpen, onClose, listingId, onReviewAdded }) => {
                   <Star
                     className={`w-7 h-7 ${
                       (hoverRating || rating) >= star
-                        ? 'fill-rose-500 text-rose-500'
-                        : 'fill-neutral-200 text-neutral-200'
+                        ? 'fill-peach text-peach-dark'
+                        : 'fill-lavender text-lavender'
                     }`}
                   />
                 </button>
               ))}
             </div>
-            <p className="text-xs text-neutral-500 mt-1 font-medium">
+            <p className="text-xs text-slate-500 mt-1 font-semibold">
               {rating === 5
-                ? 'Exceptional'
+                ? 'Exceptional stay'
                 : rating === 4
-                ? 'Very good'
+                ? 'Very good stay'
                 : rating === 3
                 ? 'Average'
                 : 'Could be better'}
             </p>
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Sub-scores */}
           <div className="space-y-3">
-            <p className="text-xs font-bold text-neutral-800">Category Ratings</p>
+            <p className="text-xs font-extrabold text-slate-800">Category Ratings</p>
             {[
               { label: 'Cleanliness', value: cleanliness, setter: setCleanliness },
               { label: 'Accuracy', value: accuracy, setter: setAccuracy },
@@ -117,17 +117,17 @@ const AddReviewModal = ({ isOpen, onClose, listingId, onReviewAdded }) => {
               { label: 'Value', value: valueScore, setter: setValueScore },
             ].map(({ label, value, setter }) => (
               <div key={label} className="flex items-center justify-between text-xs">
-                <span className="text-neutral-700 font-medium">{label}</span>
+                <span className="text-slate-700 font-semibold">{label}</span>
                 <div className="flex items-center gap-1">
                   {[1, 2, 3, 4, 5].map((s) => (
                     <button
                       type="button"
                       key={s}
                       onClick={() => setter(s)}
-                      className={`w-6 h-6 rounded text-[11px] font-bold border transition-colors ${
+                      className={`w-7 h-7 rounded-xl text-[11px] font-extrabold border transition-all ${
                         value === s
-                          ? 'bg-neutral-900 text-white border-neutral-900'
-                          : 'bg-white text-neutral-600 border-neutral-200 hover:border-neutral-400'
+                          ? 'bg-powder text-white border-powder shadow-sm'
+                          : 'bg-white text-slate-600 border-lavender hover:border-powder/60'
                       }`}
                     >
                       {s}
@@ -138,11 +138,11 @@ const AddReviewModal = ({ isOpen, onClose, listingId, onReviewAdded }) => {
             ))}
           </div>
 
-          <div className="border-t border-neutral-100" />
+          <div className="border-t border-lavender" />
 
           {/* Feedback Text */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
+            <label className="block text-xs font-bold text-slate-700 mb-1.5">
               Your Review & Experiences
             </label>
             <textarea
@@ -151,14 +151,14 @@ const AddReviewModal = ({ isOpen, onClose, listingId, onReviewAdded }) => {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Tell other travelers what you loved about this place, the neighborhood, and the host's hospitality..."
-              className="w-full p-3 text-xs rounded-xl border border-neutral-300 focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full p-3 text-xs rounded-2xl border border-lavender focus:ring-2 focus:ring-powder focus:outline-none bg-white font-medium"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-gradient-to-r from-rose-500 to-rose-600 text-white font-bold rounded-xl text-xs hover:from-rose-600 hover:to-rose-700 shadow-md transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full py-3 bg-gradient-to-r from-powder to-peach text-white font-extrabold rounded-2xl text-xs hover:opacity-90 shadow-soft transition-all disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {loading ? (
               <>

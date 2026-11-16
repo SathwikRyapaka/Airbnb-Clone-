@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Star, ShieldCheck, Calendar, Users, Info, Loader2 } from 'lucide-react';
+import { Star, ShieldCheck, Calendar, Users, Info, Loader2, Sparkles } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { bookingService } from '../../services/api';
 
@@ -111,27 +111,27 @@ const BookingWidget = ({ listing, onBookingSuccess }) => {
   };
 
   return (
-    <div className="sticky top-28 bg-white rounded-3xl border border-neutral-200 shadow-xl p-6 transition-all">
+    <div className="sticky top-28 bg-white rounded-3xl border border-lavender shadow-card p-6 sm:p-7 transition-all">
       {/* Price Header */}
-      <div className="flex items-baseline justify-between mb-4">
+      <div className="flex items-baseline justify-between mb-5">
         <div className="flex items-baseline gap-1">
-          <span className="text-2xl font-extrabold text-neutral-900">${pricePerNight}</span>
-          <span className="text-neutral-500 text-sm">night</span>
+          <span className="text-3xl font-extrabold text-slate-900">${pricePerNight}</span>
+          <span className="text-slate-400 text-sm font-medium">/ night</span>
         </div>
-        <div className="flex items-center gap-1 text-xs font-semibold text-neutral-800">
-          <Star className="w-4 h-4 fill-neutral-900" />
+        <div className="flex items-center gap-1 text-xs font-bold text-slate-800 bg-lavender/40 px-2.5 py-1 rounded-full border border-lavender">
+          <Star className="w-3.5 h-3.5 fill-peach text-peach-dark" />
           <span>{listing.rating > 0 ? listing.rating.toFixed(2) : 'New'}</span>
-          <span className="text-neutral-400">·</span>
-          <span className="text-neutral-500 underline">{listing.reviewCount} reviews</span>
+          <span className="text-slate-300">·</span>
+          <span className="text-slate-500 font-semibold">{listing.reviewCount} reviews</span>
         </div>
       </div>
 
       {/* Booking Form Box */}
       <form onSubmit={handleReserve}>
-        <div className="border border-neutral-300 rounded-2xl overflow-hidden mb-4">
-          <div className="grid grid-cols-2 divide-x divide-neutral-300 border-b border-neutral-300">
+        <div className="border border-lavender-dark/80 rounded-2xl overflow-hidden mb-4 bg-lavender/10">
+          <div className="grid grid-cols-2 divide-x divide-lavender border-b border-lavender">
             <div className="p-3">
-              <label className="block text-[10px] font-bold uppercase text-neutral-800 tracking-wider">
+              <label className="block text-[10px] font-extrabold uppercase text-powder-deep tracking-wider">
                 Check-in
               </label>
               <input
@@ -140,11 +140,11 @@ const BookingWidget = ({ listing, onBookingSuccess }) => {
                 value={checkIn}
                 min={formatDate(new Date())}
                 onChange={(e) => setCheckIn(e.target.value)}
-                className="w-full text-xs font-medium text-neutral-900 focus:outline-none bg-transparent pt-0.5"
+                className="w-full text-xs font-semibold text-slate-800 focus:outline-none bg-transparent pt-0.5"
               />
             </div>
             <div className="p-3">
-              <label className="block text-[10px] font-bold uppercase text-neutral-800 tracking-wider">
+              <label className="block text-[10px] font-extrabold uppercase text-powder-deep tracking-wider">
                 Check-out
               </label>
               <input
@@ -153,24 +153,24 @@ const BookingWidget = ({ listing, onBookingSuccess }) => {
                 value={checkOut}
                 min={checkIn || formatDate(new Date())}
                 onChange={(e) => setCheckOut(e.target.value)}
-                className="w-full text-xs font-medium text-neutral-900 focus:outline-none bg-transparent pt-0.5"
+                className="w-full text-xs font-semibold text-slate-800 focus:outline-none bg-transparent pt-0.5"
               />
             </div>
           </div>
 
-          <div className="p-3">
-            <label className="block text-[10px] font-bold uppercase text-neutral-800 tracking-wider">
+          <div className="p-3 bg-white/70">
+            <label className="block text-[10px] font-extrabold uppercase text-powder-deep tracking-wider">
               Guests (Max {listing.guests})
             </label>
             <div className="flex items-center justify-between pt-1">
-              <span className="text-xs font-medium text-neutral-900">
+              <span className="text-xs font-semibold text-slate-800">
                 {totalGuests} guest{totalGuests > 1 ? 's' : ''}
               </span>
               <div className="flex items-center gap-2">
                 <select
                   value={adults}
                   onChange={(e) => setAdults(Number(e.target.value))}
-                  className="text-xs border border-neutral-200 rounded-lg px-2 py-1 font-semibold"
+                  className="text-xs border border-lavender rounded-xl px-2.5 py-1 font-bold bg-white text-slate-800 focus:ring-1 focus:ring-powder"
                 >
                   {Array.from({ length: listing.guests }).map((_, i) => (
                     <option key={i + 1} value={i + 1}>
@@ -185,7 +185,7 @@ const BookingWidget = ({ listing, onBookingSuccess }) => {
 
         {/* Guest Notes */}
         <div className="mb-4">
-          <label className="block text-xs font-semibold text-neutral-600 mb-1">
+          <label className="block text-xs font-bold text-slate-600 mb-1">
             Note for the Host (Optional)
           </label>
           <input
@@ -193,15 +193,15 @@ const BookingWidget = ({ listing, onBookingSuccess }) => {
             value={guestNotes}
             onChange={(e) => setGuestNotes(e.target.value)}
             placeholder="e.g. Arriving around 3 PM..."
-            className="w-full px-3 py-2 text-xs border border-neutral-200 rounded-xl focus:ring-1 focus:ring-rose-500"
+            className="w-full px-3 py-2 text-xs border border-lavender rounded-xl focus:ring-2 focus:ring-powder focus:outline-none bg-white"
           />
         </div>
 
-        {/* Reserve Action Button */}
+        {/* Reserve Action Button in Powder Blue & Warm Sunset Peach Gradient */}
         <button
           type="submit"
           disabled={submitting || isHostOfListing}
-          className="w-full py-3.5 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-bold rounded-xl text-sm transition-all shadow-md hover:shadow-lg disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full py-3.5 bg-gradient-to-r from-peach to-powder hover:from-peach-hover hover:to-powder-hover text-white font-extrabold rounded-2xl text-sm transition-all shadow-soft hover:shadow-card disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {submitting ? (
             <>
@@ -210,44 +210,46 @@ const BookingWidget = ({ listing, onBookingSuccess }) => {
           ) : isHostOfListing ? (
             'Your Listing'
           ) : (
-            'Reserve'
+            <>
+              <Sparkles className="w-4 h-4" /> Reserve Stay
+            </>
           )}
         </button>
 
-        <p className="text-center text-xs text-neutral-500 mt-2">
+        <p className="text-center text-xs text-slate-400 mt-2 font-medium">
           You won't be charged yet
         </p>
 
         {/* Pricing Breakdown */}
-        <div className="mt-6 space-y-3 text-xs text-neutral-700">
+        <div className="mt-6 space-y-2.5 text-xs text-slate-600 font-medium">
           <div className="flex justify-between">
-            <span className="underline">
-              ${pricePerNight} x {nights} night{nights > 1 ? 's' : ''}
+            <span className="text-slate-500">
+              ${pricePerNight} × {nights} night{nights > 1 ? 's' : ''}
             </span>
-            <span>${basePrice}</span>
+            <span className="font-semibold text-slate-800">${basePrice}</span>
           </div>
 
           <div className="flex justify-between">
-            <span className="underline">Cleaning fee</span>
-            <span>${cleaningFee}</span>
+            <span className="text-slate-500">Cleaning fee</span>
+            <span className="font-semibold text-slate-800">${cleaningFee}</span>
           </div>
 
           <div className="flex justify-between">
-            <span className="underline">Airbnb service fee</span>
-            <span>${serviceFee}</span>
+            <span className="text-slate-500">Platform service fee</span>
+            <span className="font-semibold text-slate-800">${serviceFee}</span>
           </div>
 
-          <div className="border-t border-neutral-200 pt-3 flex justify-between text-sm font-bold text-neutral-900">
+          <div className="border-t border-lavender pt-3 flex justify-between text-base font-extrabold text-slate-900">
             <span>Total before taxes</span>
-            <span>${totalAmount}</span>
+            <span className="text-powder-deep">${totalAmount}</span>
           </div>
         </div>
       </form>
 
       {/* Quality assurance footer */}
-      <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center gap-2 text-xs text-neutral-500">
-        <ShieldCheck className="w-5 h-5 text-rose-500 flex-shrink-0" />
-        <span>Every booking includes free protection from Host cancellations and listing inaccuracies.</span>
+      <div className="mt-6 pt-4 border-t border-lavender flex items-center gap-2.5 text-xs text-slate-500">
+        <ShieldCheck className="w-5 h-5 text-powder flex-shrink-0" />
+        <span>Every stay includes Airbnb Cover against Host cancellations and listing inaccuracies.</span>
       </div>
     </div>
   );
