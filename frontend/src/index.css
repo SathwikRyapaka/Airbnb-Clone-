@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-neutral-800 bg-white;
+  }
+}
+
+/* Custom scrollbars for category carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Leaflet map marker pulse & pin styles */
+.airbnb-price-pin {
+  background-color: white;
+  border-radius: 24px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.airbnb-price-pin:hover,
+.airbnb-price-pin.active {
+  transform: scale(1.1);
+  background-color: #222222;
+  color: white;
+}
